@@ -16,7 +16,6 @@ class Controller
         
         extract($params);
 
-
         ob_start();
         if (file_exists($pathToView)) {
             require $pathToView;
