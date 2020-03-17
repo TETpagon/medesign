@@ -30,22 +30,25 @@ class Sentence extends \MeDesign\core\Model
      */
     public function addMultiple(array $sentences)
     {
+        $array = [];
         $pdo = $this->getPDO();
-        $sql = "INSERT IGNORE INTO sentences (sentence) VALUES ";
+        $sql = "INSERT IGNORE INTO sentences (sentence, hash) VALUES ";
         foreach ($sentences as $sentence) {
-            $sql .= " (?),";
+            $sql .= " (?, ?),";
+            $array[] = $sentence;
+            $array[] = hash("sha512", $sentence);
         }
         $sql = substr($sql, 0, -1);
         $stm = $pdo->prepare($sql);
-        $stm->execute($sentences);
+        $stm->execute($array);
     }
 
     /**
      * Выводит все Предложения из базы данных
      *
      * @return array
-     */         
-    public function getAll() : array
+     */
+    public function getAll(): array
     {
         $pdo = $this->getPDO();
         $sql = "SELECT * FROM sentences ORDER BY created DESC, sentence";
@@ -60,7 +63,7 @@ class Sentence extends \MeDesign\core\Model
      * @param string $expression
      * @return array
      */
-    public function generateSentencesByExpression(string $expression) : array
+    public function generateSentencesByExpression(string $expression): array
     {
         $expr = $expression;
         $i = 0;
