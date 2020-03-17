@@ -13,11 +13,11 @@ class Model
 
     public function getPDO() : \PDO 
     {
-        $host = '127.0.0.1';
-        $db   = 'medesign';
-        $user = 'anicomic';
-        $pass = 'anicomic';
-        $charset = 'utf8';
+        $host = $this->configDb['host'];
+        $db   = $this->configDb['db'];
+        $user = $this->configDb['user'];
+        $pass = $this->configDb['pass'];
+        $charset = $this->configDb['charset'];
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
         $opt = [

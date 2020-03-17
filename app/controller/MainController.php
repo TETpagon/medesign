@@ -19,7 +19,6 @@ class MainController extends \MeDesign\core\Controller
             $sentences = $model->generateSentencesByExpression($expression);
 
             $model->addMultiple($sentences);
-            // $model->add($expression);
             $sentences = $model->getAll();
             $this->render('sentences', ['sentences' => $sentences]);
         } else {
