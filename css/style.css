@@ -1,6 +1,15 @@
-.form{
+.form {
     display:flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+
+.sentence {
+    font-size: 17pt;
+    padding: 15px;
+}
+
+.ol-sentence {
+    padding: 5px;
 }
